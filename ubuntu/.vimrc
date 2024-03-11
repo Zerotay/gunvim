@@ -1,4 +1,4 @@
-syntax on
+
 colorscheme dw_green
 set background=dark
 
@@ -16,3 +16,9 @@ set smarttab
 set smartindent
 set ruler
 set fileencodings=utf8,euc-kr
+set encoding=utf-8
+
+call plug#begin('~/.vim/plugged')
+	Plug 'tpope/vim-surround'
+	Plug 'scrooloose/nerdtree'
+call plug#end()

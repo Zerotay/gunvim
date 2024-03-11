@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/root/project/findear-infra-setting/dockerfiles'
+let g:netrw_dirhist_8='/root/.vim/plugged/vim-surround/plugin'
+let g:netrw_dirhist_7='/root/.vim/plugged/vim-surround'
+let g:netrw_dirhist_6='/project/findear-infra-setting'
+let g:netrw_dirhist_5='/project'
+let g:netrw_dirhist_4='/project/gunvim'
+let g:netrw_dirhist_3='/project/gunvim/ubuntu'
+let g:netrw_dirhist_2='/project/gunvim/ubuntu/.vim'
+let g:netrw_dirhist_1='/project/gunvim/ubuntu/.vim/autoload'
