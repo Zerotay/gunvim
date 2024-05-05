@@ -1,7 +1,8 @@
 
 colorscheme dw_green
-set background=dark
+"set background=dark
 
+"default setting
 set hlsearch
 set nu
 set autoindent
@@ -18,7 +19,75 @@ set ruler
 set fileencodings=utf8,euc-kr
 set encoding=utf-8
 
+filetype on
+au FileType yaml,yml set shiftwidth=2
+au FileType yaml,yml set ts=2
+au FileType yaml,yml set sts=2
+
+"--------------------------------------------맨밑 상태바 표시 향상
+set laststatus=2    "두줄로 표시
+set statusline=\ %<%l:%v\ [%P]%=%a\ %h%m%r\ %F\  "현재 라인 위치 출력
+"------------------------------------------- au filetype (파일타입지정)
+au FileType python map <f2> : !python3 %
+
 call plug#begin('~/.vim/plugged')
 	Plug 'tpope/vim-surround'
 	Plug 'scrooloose/nerdtree'
+
+	Plug 'davidhalter/jedi-vim'
+	let g:jedi#show_call_signatures=0       " 자세히 설명하는 창을 보여준다 1=활성화, 0=비>활성화
+
+	Plug 'rust-lang/rust.vim'
+	let g:rustfmt_command = 'rustfmt'
+	let g:rustfmt_command = 'rustfmt'
+
+
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+	let g:coc_disable_startup_warning = 1
+	let g:LanguageClient_serverCommands = {
+	\ 'rust': ['rust-analyzer'],
+	\ }  
+	au FileType rust map <f2> :Crun
+	au FileType rust map <f3> :Crun k10a401.p.ssafy.io
+
+	Plug 'jiangmiao/auto-pairs',
+
+	Plug 'rafi/awesome-vim-colorschemes'
+
+	Plug 'vim-airline/vim-airline'
 call plug#end()
+
+" use <tab> to trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+
+"-----------------------------------------------------------------------"
+" Aiarline
+"-----------------------------------------------------------------------"
+set laststatus=2
+let g:airline#extensions#tabline#enabled = 1 "버퍼 목록 켜기
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+" 파일명만 출력
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_highlighting_cache = 1
+
+let g:airline_powerline_fonts = 1
+let g:airline_theme= 'minimalist'
+let g:airline_section_y = ''
+let g:airline_section_warning= '' "마지막 status창 사용 안함
+" 버퍼 목록 켜기
+" 이 옵션은 버퍼를 수정한 직후 버퍼를 감춰지도록 한다.
+" 이 방법으로 버퍼를 사용하려면 거의 필수다.
+set hidden
