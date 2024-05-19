@@ -1,5 +1,6 @@
 
-colorscheme dw_green
+"colorscheme dw_green
+syntax on
 "set background=dark
 
 "default setting
@@ -29,19 +30,38 @@ set laststatus=2    "두줄로 표시
 set statusline=\ %<%l:%v\ [%P]%=%a\ %h%m%r\ %F\  "현재 라인 위치 출력
 "------------------------------------------- au filetype (파일타입지정)
 au FileType python map <f2> : !python3 %
+au FileType python map <f3> : !sudo python3 % http://qqueueing.duckdns.org/product/1
 
 call plug#begin('~/.vim/plugged')
+	" easy surrounding
 	Plug 'tpope/vim-surround'
+	" easy handle file system tree
 	Plug 'scrooloose/nerdtree'
+	" easy auto pairs
+	Plug 'jiangmiao/auto-pairs',
+	" use airline
+	Plug 'vim-airline/vim-airline'
 
+	" use for snippet
+	Plug 'sirver/ultisnips'
+	let g:UltiSnipsExpandTrigger="<Tab>"
+	let g:UltiSnipsJumpForwardTrigger="<Tab>"
+	let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+	let g:UltiSnipsEditSplit="vertical"
+	let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips']
+
+
+	" Python ide
 	Plug 'davidhalter/jedi-vim'
 	let g:jedi#show_call_signatures=0       " 자세히 설명하는 창을 보여준다 1=활성화, 0=비>활성화
 
+	" rust ide
 	Plug 'rust-lang/rust.vim'
 	let g:rustfmt_command = 'rustfmt'
 	let g:rustfmt_command = 'rustfmt'
 
 
+	" for auto completetion, syntax check
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
@@ -52,13 +72,11 @@ call plug#begin('~/.vim/plugged')
 	\ 'rust': ['rust-analyzer'],
 	\ }  
 	au FileType rust map <f2> :Crun
-	au FileType rust map <f3> :Crun k10a401.p.ssafy.io
 
-	Plug 'jiangmiao/auto-pairs',
 
 	Plug 'rafi/awesome-vim-colorschemes'
+	Plug 'arzg/vim-colors-xcode'
 
-	Plug 'vim-airline/vim-airline'
 call plug#end()
 
 " use <tab> to trigger completion and navigate to the next complete item
